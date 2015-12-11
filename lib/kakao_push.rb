@@ -1,5 +1,6 @@
 require "faraday"
 require "faraday_middleware"
+require "json"
 
 require "kakao_push/response"
 require "kakao_push/client"

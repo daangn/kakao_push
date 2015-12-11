@@ -1,5 +1,3 @@
-require 'multi_json'
-
 module KakaoPush
   class Client
     API_HOST = "https://kapi.kakao.com"
