@@ -1,36 +1,90 @@
 # KakaoPush
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/kakao_push`. To experiment with that code, run `bin/console` for an interactive prompt.
+카카오 플랫폼 API에서 제공하는 [푸시알림](https://developers.kakao.com/features/platform#푸시-알림)을 호출하는 젬입니다. iOS, 안드로이드 사용자에게 푸시를 보낼때 유용한 카카오 푸시알림은 REST API로만 제공되고 있기에 이를 젬으로 만들어 봤습니다.
 
-TODO: Delete this and the text above, and describe your gem
+주의: 이 젬은 카카오에서 공식적으로 제공하는 젬이 아닙니다. 이점 유의 하시기 바랍니다.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Gemfile 파일에 다음과 같이 추가하고:
 
 ```ruby
-gem 'kakao_push'
+gem 'kakao_push', '~> 0.0.1'
 ```
 
-And then execute:
+아래 명령어를 실행합니다:
 
     $ bundle
 
-Or install it yourself as:
+혹은 젬을 직접 설치할 수 있습니다:
 
     $ gem install kakao_push
 
-## Usage
+## 사용법
 
-TODO: Write usage instructions here
+### 클라이언트 객체 생성
 
-## Development
+```ruby
+client = KakaoPush::Client.new(rest_api_key: 'kakao_admin_key')
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### 토큰 등록
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+파라미터 및 응답에 관한 자세한 정보는 [카카오 REST API 개발가이드 - 푸시알림](https://developers.kakao.com/docs/restapi#푸시-알림) 참고
+
+```ruby
+res = client.register(uuid: 1, push_type: 'apns', device_id: 'device_id', push_token: 'push_token')
+
+res.success? # 등록에 성공한 경우 true
+res.fail? # 등록에 실패한 경우 true
+res.data # 등록에 성공한 경우 숫자 30 반환. 30일 후에 해당 토큰이 만료됨을 의미
+=> 30
+```
+
+### 토큰 조회
+
+파라미터 및 응답에 관한 자세한 정보는 [카카오 REST API 개발가이드 - 푸시알림](https://developers.kakao.com/docs/restapi#푸시-알림) 참고
+
+```ruby
+res = client.tokens(uuid: 1)
+
+res.success? # 조희에 성공한 경우 true
+res.fail? # 조회에 실패한 경우 true
+res.data # 조회에 성공한 경우 데이터 반환. 배열로 반환되지만 배열 객체는 1개 뿐이므로 유의
+=> [{"user_id":"1","device_id":"a","push_type":"apns","push_token":"aaa","created_at":"2015-12-11T11:34:17Z","updated_at":"2015-12-11T11:34:17Z"}]
+```
+
+### 토큰 삭제
+
+파라미터 및 응답에 관한 자세한 정보는 [카카오 REST API 개발가이드 - 푸시알림](https://developers.kakao.com/docs/restapi#푸시-알림) 참고
+
+```ruby
+res = client.deregister(uuid: 1, push_type: 'apns', device_id: 'device_id')
+res.success? # 삭제에 성공한 경우 true
+res.fail? # 삭제에 실패한 경우 true
+```
+
+### 푸시 전송
+
+파라미터 및 응답에 관한 자세한 정보는 [카카오 REST API 개발가이드 - 푸시알림](https://developers.kakao.com/docs/restapi#푸시-알림) 참고
+
+```ruby
+apns = KakaoPush::Apns.new(badge: nil, sound: 'default', push_alert: true, message: nil, custom_field: nil, push_token: nil)
+gcm = KakaoPush::Gcm.new(collapse: nil, delay_while_idle: nil, return_url: nil, custom_field: 'data', push_token: nil)
+res = client.send(uuids: [1], apns: apns, gcm: gcm, bypass: false)
+
+res.success? # 전송에 성공한 경우 true
+res.fail? # 전송에 실패한 경우 true
+```
+
+success? 결과가 true이더라도 실제 사용자에 디바이스에 전송되었음을 보장하지 않음.
+
+### 서버에 저장할 값
+
+디바이스로부터 받은 토큰, 푸쉬 타입(apns, gcm)은 서버에 저장하는것이 좋다. 토큰 삭제를 안할거라면 푸쉬 타입은 굳이 저장할 필요 없습니다. 푸쉬 토큰은 30일이 지나면 토큰 조회 API를 통해서도 조회 할 수 없으므로 될수 있으면 저장하는 편이 좋다고 생각합니다.
+
+예를 들어보자면 디바이스로부터 받은 토큰과 카카오 푸쉬 만료 예정일을 서버에 저장하고 푸쉬 만료 예정일이 되기 전에 다시 토큰 등록 API를 호출하는 사례도 있습니다.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/kakao_push.
-
+버그 레포팅과 풀리퀘스트는 GitHub에 남겨주세요. https://github.com/n42corp/kakao_push
