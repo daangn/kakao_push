@@ -6,6 +6,7 @@ require 'kakao_push/version'
 Gem::Specification.new do |spec|
   spec.name          = "kakao_push"
   spec.version       = KakaoPush::VERSION
+  spec.licenses      = ['MIT']
   spec.authors       = ["ChangHoon Jung"]
   spec.email         = ["iamseapy@gmail.com"]
 
