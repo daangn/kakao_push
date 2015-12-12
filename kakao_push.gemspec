@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{카카오 플랫폼 API에서 제공하는 푸시알림을 호출하는 젬입니다. iOS, 안드로이드 사용자에게 푸시를 보낼때 유용한 카카오 푸시알림은 REST API로만 제공되고 있기에 이를 젬으로 만들어 봤습니다.}
   spec.homepage      = "https://github.com/n42corp/kakao_push"
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|example)/}) }
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
