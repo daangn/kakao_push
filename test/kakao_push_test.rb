@@ -109,7 +109,7 @@ class KakaoPushTest < Minitest::Test
       ]
     }
 
-    stubs.post('/v1/push/send', 'bypass=&push_message=%7B%22for_apns%22%3A%7B%22for_apns%22%3A%7B%22sound%22%3A%22default%22%2C%22push_alert%22%3Atrue%7D%7D%2C%22for_gcm%22%3A%7B%22for_gcm%22%3A%7B%22custom_field%22%3A%22data%22%7D%7D%7D&uuids=%5B1234%5D') { |env| 
+    stubs.post('/v1/push/send', 'bypass=false&push_message=%7B%22for_apns%22%3A%7B%22sound%22%3A%22default%22%2C%22push_alert%22%3Atrue%7D%2C%22for_gcm%22%3A%7B%22custom_field%22%3A%22data%22%7D%7D&uuids=%5B1234%5D') { |env| 
       [
         400,
         {},
@@ -120,7 +120,7 @@ class KakaoPushTest < Minitest::Test
       ]
     }
 
-    stubs.post('/v1/push/send', 'bypass=&push_message=%7B%22for_apns%22%3A%7B%22for_apns%22%3A%7B%22sound%22%3A%22default%22%2C%22push_alert%22%3Atrue%7D%7D%2C%22for_gcm%22%3A%7B%22for_gcm%22%3A%7B%22custom_field%22%3A%22data%22%7D%7D%7D&uuids=%5B1%5D') { |env| 
+    stubs.post('/v1/push/send', 'bypass=false&push_message=%7B%22for_apns%22%3A%7B%22sound%22%3A%22default%22%2C%22push_alert%22%3Atrue%7D%2C%22for_gcm%22%3A%7B%22custom_field%22%3A%22data%22%7D%7D&uuids=%5B1%5D') { |env| 
       [
         200,
         {},
