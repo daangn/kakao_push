@@ -17,7 +17,7 @@ module KakaoPush
       for_apns['message'] = @message if !@message.nil?
       for_apns['custom_field'] = @custom_field if !@custom_field.nil?
       for_apns['push_token'] = @push_token if !@push_token.nil?
-      { "for_apns" => for_apns }
+      for_apns
     end
   end
 end

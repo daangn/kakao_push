@@ -15,7 +15,7 @@ module KakaoPush
       for_gcm['return_url'] = @return_url if !@return_url.nil?
       for_gcm['custom_field'] = @custom_field if !@custom_field.nil?
       for_gcm['push_token'] = @push_token if !@push_token.nil?
-      { "for_gcm" => for_gcm }
+      for_gcm
     end
   end
 end
