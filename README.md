@@ -1,4 +1,4 @@
-# KakaoPush
+# KakaoPush [![Gem Version](https://badge.fury.io/rb/kakao_push.svg)](https://badge.fury.io/rb/kakao_push)
 
 카카오 플랫폼 API에서 제공하는 [푸시알림](https://developers.kakao.com/features/platform#푸시-알림)을 호출하는 젬입니다. iOS, 안드로이드 사용자에게 푸시를 보낼때 유용한 카카오 푸시알림은 REST API로만 제공되고 있기에 이를 젬으로 만들어 봤습니다.
 
