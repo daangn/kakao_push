@@ -54,7 +54,7 @@ module KakaoPush
       body = {
         'uuids': uuids.to_json,
         'push_message': build_message(apns: apns, gcm: gcm).to_json,
-        'bypass': ''
+        'bypass': bypass
       }
 
       KakaoPush::Response.new(
