@@ -8,7 +8,7 @@ module KakaoPush
     end
 
     def body
-      @body ||= MultiJson.load(@raw_body) if !@raw_body.nil?
+      @body ||= MultiJson.load(@raw_body) if !@raw_body.nil? && !@raw_body.empty?
     end
 
     def status
