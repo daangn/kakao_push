@@ -2,9 +2,11 @@
 
 카카오 플랫폼 API에서 제공하는 [푸시알림](https://developers.kakao.com/features/platform#푸시-알림)을 호출하는 젬입니다. iOS, 안드로이드 사용자에게 푸시를 보낼때 유용한 카카오 푸시알림은 REST API로만 제공되고 있기에 이를 젬으로 만들어 봤습니다.
 
+[당근마켓](https://www.daangn.com/)([아이폰](https://itunes.apple.com/kr/app/pangyojangteo/id1018769995?l=ko&ls=1&mt=8), [안드로이드](https://play.google.com/store/apps/details?id=com.towneers.www))에서 사용하던 코드를 젬으로 만들었습니다.
+
 주의: 이 젬은 카카오에서 공식적으로 제공하는 젬이 아닙니다. 이점 유의 하시기 바랍니다.
 
-## Installation
+## 설치
 
 Gemfile 파일에 다음과 같이 추가하고:
 
@@ -77,7 +79,7 @@ res.success? # 전송에 성공한 경우 true
 res.fail? # 전송에 실패한 경우 true
 ```
 
-success? 결과가 true이더라도 실제 사용자에 디바이스에 전송되었음을 보장하지 않음.
+success? 결과가 true이더라도 실제 사용자에 디바이스에 전송되었음을 보장하지 않음. 메시지 포맷이 다르거나 맞지 않아도 success? 값이 true로 반환되기도 하므로 실제 전송 유무는 디바이스에서 테스트가 필요합니다.
 
 ### 서버에 저장할 값
 
@@ -92,6 +94,11 @@ success? 결과가 true이더라도 실제 사용자에 디바이스에 전송�
 ```
 {"code":-2,"msg":"[appName] Invalid Kpusher Param. ( appName=1111, uid=1234, did=dlskjflsk3ksdjfl, pushType=apns, pushToken=lqO_NIwaoAcI0MssA )"}%
 ```
+
+## 도움 주신 분들
+
+- [@marocchino](https://github.com/marocchino) : 테스트 코드에서 막혀 있을때 도움 주셨습니다.
+- [@shia](https://github.com/riseshia) : 응답 및 푸시 메시지 구조를 잡는데 도움 주셨습니다. 
 
 ## Contributing
 
