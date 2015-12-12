@@ -99,6 +99,7 @@ success? 결과가 true이더라도 실제 사용자에 디바이스에 전송�
 
 - [@marocchino](https://github.com/marocchino) : 테스트 코드에서 막혀 있을때 도움 주셨습니다.
 - [@shia](https://github.com/riseshia) : 응답 및 푸시 메시지 구조를 잡는데 도움 주셨습니다. 
+- [qiita-rb](https://github.com/increments/qiita-rb) : faraday 사용법등 젬을 만드는데 많은 부분 도움 받았습니다.
 
 ## Contributing
 
