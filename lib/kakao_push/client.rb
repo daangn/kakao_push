@@ -4,9 +4,8 @@ module KakaoPush
 
     attr_accessor :rest_api_key
 
-    def initialize(rest_api_key:)
-      @rest_api_key = rest_api_key
-
+    def initialize(rest_api_key: ENV['KAKAO_PUSH_CLIENT_ID'])
+      self.rest_api_key = rest_api_key
       self.connection = build_connection
     end
 
@@ -83,7 +82,7 @@ module KakaoPush
     def faraday_client_options
       {
         headers: {
-          "Authorization" => "KakaoAK #{@rest_api_key}"
+          "Authorization" => "KakaoAK #{rest_api_key}"
         },
         url: API_HOST
       }
