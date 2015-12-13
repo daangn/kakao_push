@@ -4,7 +4,7 @@ module KakaoPush
 
     attr_accessor :rest_api_key
 
-    def initialize(rest_api_key:)
+    def initialize(rest_api_key: ENV['KAKAO_PUSH_CLIENT_ID'])
       self.rest_api_key = rest_api_key
       self.connection = build_connection
     end

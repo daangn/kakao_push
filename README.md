@@ -26,8 +26,15 @@ gem 'kakao_push', '~> 0.0.1'
 
 ### 클라이언트 객체 생성
 
+키를 직접 넘기거나, 기본값으로 env값을 참조할 수 있습니다:
+
 ```ruby
 client = KakaoPush::Client.new(rest_api_key: 'kakao_admin_key')
+
+# 아니면
+# KAKAO_PUSH_CLIENT_ID=kakao_admin_key
+
+client = KakaoPush::Client.new
 ```
 
 ### 토큰 등록
