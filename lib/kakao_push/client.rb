@@ -52,9 +52,9 @@ module KakaoPush
 
     def send(uuids: [], apns:, gcm:, bypass: false)
       body = {
-        'uuids': uuids.to_json,
-        'push_message': build_message(apns: apns, gcm: gcm).to_json,
-        'bypass': bypass
+        'uuids' => uuids.to_json,
+        'push_message' => build_message(apns: apns, gcm: gcm).to_json,
+        'bypass' => bypass
       }
 
       KakaoPush::Response.new(
