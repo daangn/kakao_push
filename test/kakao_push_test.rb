@@ -105,7 +105,16 @@ class KakaoPushTest < Minitest::Test
       [
         200,
         {},
-        [{"user_id":"1","device_id":"a","push_type":"apns","push_token":"aaa","created_at":"2015-12-11T11:34:17Z","updated_at":"2015-12-11T11:34:17Z"}].to_json
+        [
+          {
+            "user_id" => "1",
+            "device_id" => "a",
+            "push_type" => "apns",
+            "push_token" => "aaa",
+            "created_at" => "2015-12-11T11:34:17Z",
+            "updated_at" => "2015-12-11T11:34:17Z"
+          }
+        ].to_json
       ]
     }
 
