@@ -2,17 +2,13 @@ require 'multi_json'
 
 module KakaoPush
   class Response
+
+    attr_reader :status
+
     def initialize(faraday_response)
-      @raw_body = faraday_response.body
-      @raw_status = faraday_response.status
-    end
-
-    def body
-      @body ||= MultiJson.load(@raw_body) if !@raw_body.nil? && !@raw_body.empty?
-    end
-
-    def status
-      @raw_status
+      self.raw_body = faraday_response.body
+      self.status = faraday_response.status
+      self.body = MultiJson.load(raw_body) if raw_body && !raw_body.empty?
     end
 
     def success?
@@ -28,17 +24,13 @@ module KakaoPush
     end
 
     def error_code
-      if fail? && body.is_a?(Hash) && body.has_key?('code')
-        return body['code']
-      end
-      nil
+      return if success?
+      body['code'] if body.is_a?(Hash) && body.has_key?('code')
     end
 
     def error_message
-      if fail? && body.is_a?(Hash) && body.has_key?('msg')
-        return body['msg']
-      end
-      nil
+      return if success?
+      body['msg'] if body.is_a?(Hash) && body.has_key?('msg')
     end
 
     def to_s
@@ -53,5 +45,10 @@ error_message : #{error_message}
 
       EOS
     end
+
+    private
+
+    attr_writer :status
+    attr_accessor :raw_body, :body
   end
 end
