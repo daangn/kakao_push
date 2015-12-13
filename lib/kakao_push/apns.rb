@@ -10,14 +10,11 @@ module KakaoPush
     end
 
     def to_hash
-      for_apns = {}
-      for_apns['badge'] = @badge if !@badge.nil?
-      for_apns['sound'] = @sound if !@sound.nil?
-      for_apns['push_alert'] = @push_alert if !@push_alert.nil?
-      for_apns['message'] = @message if !@message.nil?
-      for_apns['custom_field'] = @custom_field if !@custom_field.nil?
-      for_apns['push_token'] = @push_token if !@push_token.nil?
-      for_apns
+      Hash[
+        instance_variables.map { |var_name|
+          [var_name.to_s.gsub('@',''), instance_variable_get(var_name)]
+        }.select {|el| el.last }
+      ]
     end
   end
 end

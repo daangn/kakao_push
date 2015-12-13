@@ -9,13 +9,11 @@ module KakaoPush
     end
 
     def to_hash
-      for_gcm = {}
-      for_gcm['collapse'] = @collapse if !@collapse.nil?
-      for_gcm['delay_while_idle'] = @delay_while_idle if !@delay_while_idle.nil?
-      for_gcm['return_url'] = @return_url if !@return_url.nil?
-      for_gcm['custom_field'] = @custom_field if !@custom_field.nil?
-      for_gcm['push_token'] = @push_token if !@push_token.nil?
-      for_gcm
+      Hash[
+        instance_variables.map { |var_name|
+          [var_name.to_s.gsub('@',''), instance_variable_get(var_name)]
+        }.select {|el| el.last }
+      ]
     end
   end
 end
