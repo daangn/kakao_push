@@ -11,7 +11,7 @@
 Gemfile 파일에 다음과 같이 추가하고:
 
 ```ruby
-gem 'kakao_push', '~> 0.0.1'
+gem 'kakao_push', '~> 0.1.2'
 ```
 
 아래 명령어를 실행합니다:
