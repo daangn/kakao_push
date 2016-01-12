@@ -84,7 +84,11 @@ module KakaoPush
         headers: {
           "Authorization" => "KakaoAK #{rest_api_key}"
         },
-        url: API_HOST
+        url: API_HOST,
+        request: {
+          timeout: 5, 
+          open_timeout: 5
+        }
       }
     end
 
