@@ -79,7 +79,7 @@ res.fail? # 삭제에 실패한 경우 true
 
 ```ruby
 apns = KakaoPush::Apns.new(badge: nil, sound: 'default', push_alert: true, message: nil, custom_field: nil, push_token: nil)
-gcm = KakaoPush::Gcm.new(collapse: nil, delay_while_idle: nil, return_url: nil, custom_field: 'data', push_token: nil)
+gcm = KakaoPush::Gcm.new(collapse: nil, delay_while_idle: nil, time_to_live: nil, dry_run: nil, priority: nil, return_url: nil, custom_field: 'data', push_token: nil)
 res = client.send(uuids: [1], apns: apns, gcm: gcm, bypass: false)
 
 res.success? # 전송에 성공한 경우 true

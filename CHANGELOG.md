@@ -1,3 +1,9 @@
+## 0.1.3 (2017-01-12)
+
+Add:
+
+  - GCM 옵션에 time_to_live, dry_run, priority 추가
+
 ## 0.1.2 (2016-01-12)
 
 Bugfixes:
