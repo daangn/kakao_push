@@ -73,13 +73,12 @@ module KakaoPush
                         backoff_factor: 2,
                         methods: [:delete, :get, :head, :options, :put, :post],
                         exceptions: [
-                          Errno::ETIMEDOUT,
+                          ::Errno::ETIMEDOUT,
                           'Timeout::Error',
-                          Error::TimeoutError,
-                          Faraday::Error::RetriableResponse,
-                          Net::OpenTimeout,
-                          Net::ReadTimeout,
-                          Faraday::TimeoutError
+                          ::Faraday::Error::TimeoutError,
+                          ::Net::OpenTimeout,
+                          ::Net::ReadTimeout,
+                          ::Faraday::TimeoutError
                         ]
         builder.request :url_encoded
         if block.nil?
