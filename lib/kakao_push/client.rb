@@ -66,6 +66,21 @@ module KakaoPush
 
     def build_connection(&block)
       Faraday.new(faraday_client_options) do |builder|
+        builder.request :retry,
+                        max: 2,
+                        interval: 0.05,
+                        interval_randomness: 0.5,
+                        backoff_factor: 2,
+                        methods: [:delete, :get, :head, :options, :put, :post],
+                        exceptions: [
+                          Errno::ETIMEDOUT,
+                          'Timeout::Error',
+                          Error::TimeoutError,
+                          Faraday::Error::RetriableResponse,
+                          Net::OpenTimeout,
+                          Net::ReadTimeout,
+                          Faraday::TimeoutError
+                        ]
         builder.request :url_encoded
         if block.nil?
           builder.adapter Faraday.default_adapter
