@@ -76,8 +76,8 @@ module KakaoPush
                           ::Errno::ETIMEDOUT,
                           'Timeout::Error',
                           ::Faraday::Error::TimeoutError,
-                          ::Net::OpenTimeout,
-                          ::Net::ReadTimeout,
+                          'Net::OpenTimeout',
+                          'Net::ReadTimeout',
                           ::Faraday::TimeoutError
                         ]
         builder.request :url_encoded

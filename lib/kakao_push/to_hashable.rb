@@ -4,7 +4,7 @@ module KakaoPush
       Hash[
         instance_variables.map { |var_name|
           [var_name.to_s.gsub('@',''), instance_variable_get(var_name)]
-        }.select {|el| el.last }
+        }.select {|el| !el.last.nil? }
       ]
     end
   end

@@ -78,7 +78,7 @@ res.fail? # 삭제에 실패한 경우 true
 파라미터 및 응답에 관한 자세한 정보는 [카카오 REST API 개발가이드 - 푸시알림](https://developers.kakao.com/docs/restapi#푸시-알림) 참고
 
 ```ruby
-apns = KakaoPush::Apns.new(badge: nil, sound: 'default', push_alert: true, message: nil, custom_field: nil, push_token: nil)
+apns = KakaoPush::Apns.new(badge: nil, sound: 'default', push_alert: true, message: nil, custom_field: nil, push_token: nil, apns_env: 'sandbox')
 gcm = KakaoPush::Gcm.new(collapse: nil, delay_while_idle: nil, time_to_live: nil, dry_run: nil, priority: nil, return_url: nil, custom_field: 'data', push_token: nil)
 res = client.send(uuids: [1], apns: apns, gcm: gcm, bypass: false)
 
@@ -87,6 +87,8 @@ res.fail? # 전송에 실패한 경우 true
 ```
 
 success? 결과가 true이더라도 실제 사용자에 디바이스에 전송되었음을 보장하지 않음. 메시지 포맷이 다르거나 맞지 않아도 success? 값이 true로 반환되기도 하므로 실제 전송 유무는 디바이스에서 테스트가 필요합니다.
+
+apns_env 값은 production 인 경우 nil로 전송
 
 ### 서버에 저장할 값
 
